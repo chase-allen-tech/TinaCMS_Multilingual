@@ -5,12 +5,9 @@ import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { GitClient, GitMediaStore } from '@tinacms/git-client'
 import { GlobalStyles as TinaStyles } from '@tinacms/styles'
 
-import {resources} from '../i18n/Strings';
 import { I18nextProvider } from 'react-i18next'
 import i18n from './i18n';
 
-// import { I18nProvider } from '@react-aria/i18n'
-// import { I18nProvider, FormattedString } from "i18nlib";
 
 
 const App = ({ Component, pageProps }) => {

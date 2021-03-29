@@ -4,8 +4,6 @@ import ReactMarkdown from 'react-markdown'
 import { useForm, usePlugin, useCMS } from 'tinacms'
 import { InlineForm, InlineText, InlineBlocks, InlineField } from 'react-tinacms-inline'
 import { InlineWysiwyg } from 'react-tinacms-editor'
-// import ProductCard from '../components/productCard'
-// import ProductList from '../components/productList'
 // import createProductBlock from '../blocks/productListBlock'
 // import { useMemo } from 'react'
 // import heroBlock from '../blocks/heroBlock'
@@ -14,6 +12,7 @@ import { useState } from 'react'
 import { Button } from '@tinacms/styles'
 
 import { useTranslation } from 'react-i18next';
+import i18n from './i18n';
 
 const Home = ({ markdownFile }) => {
 
@@ -53,8 +52,13 @@ const Home = ({ markdownFile }) => {
   }
 
   var onClickLangBtn = () => {
-    if (btn_lang == ENGLISH) { setBtnLang(SPANISH) }
-    else { setBtnLang(ENGLISH) }
+    if (btn_lang == ENGLISH) { 
+      setBtnLang(SPANISH) 
+      i18n.changeLanguage('es')
+    } else { 
+      setBtnLang(ENGLISH) 
+      i18n.changeLanguage('en')
+    }
     setInputValue(editableData.frontmatter.title);
   }
 
@@ -66,15 +70,12 @@ const Home = ({ markdownFile }) => {
 
   return (
     <InlineForm form={form}>
-      <Head>
-        <title>Temp</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Head><title>Temp</title></Head>
 
-      {t('title')}
+      <h2>{t('title')}</h2>
 
-      <Button onClick={onClickLangBtn}>{btn_lang}</Button>
-      <Button onClick={onClickModeBtn}>{btn_mode}</Button>
+      <Button onClick={onClickLangBtn}>{t('langbutton')}</Button>
+      <Button onClick={onClickModeBtn}>{t('mode')}</Button>
       <InlineField name="title">
         {({ input }) => {
           if (cms.enabled) {
