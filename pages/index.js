@@ -31,6 +31,7 @@ const Home = ({ markdownFile }) => {
     const constructor = () => {
         if (constructorHasRun) return;
         var lang = btn_lang == ENGLISH ? 'es' : 'en';
+        i18n.changeLanguage('en')
         setInputValue(localStorage.getItem(lang))
         setConstructorHasRun(true);
     };
