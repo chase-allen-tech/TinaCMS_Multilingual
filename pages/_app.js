@@ -4,10 +4,14 @@ import '../styles/styles.css'
 import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { GitClient, GitMediaStore } from '@tinacms/git-client'
 import { GlobalStyles as TinaStyles } from '@tinacms/styles'
-// import { toMarkdownString } from 'next-tinacms-markdown'
-// import slugify from 'slugify'
-import Nav from '../components/nav'
-// import Head from 'next/head'
+
+import {resources} from '../i18n/Strings';
+import { I18nextProvider } from 'react-i18next'
+import i18n from './i18n';
+
+// import { I18nProvider } from '@react-aria/i18n'
+// import { I18nProvider, FormattedString } from "i18nlib";
+
 
 const App = ({ Component, pageProps }) => {
 
@@ -19,7 +23,7 @@ const App = ({ Component, pageProps }) => {
       enabled: process.env.NODE_ENV !== "production",
       sidebar: true,
       toolbar: { hidden: false },
-      plugins: [MarkdownFieldPlugin],
+      plugins: [MarkdownFieldPlugin], 
       apis: {
         git: gitClient,
       },
@@ -30,13 +34,14 @@ const App = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <TinaProvider cms={cms}>
-      <div className="container">
-        <TinaStyles />
-          <Nav />
-        <Component {...pageProps} />
-      </div>
-    </TinaProvider>
+    <I18nextProvider i18n={i18n}>
+      <TinaProvider cms={cms}>
+        <div className="container">
+          <TinaStyles />
+          <Component {...pageProps} />
+        </div>
+      </TinaProvider>
+    </I18nextProvider>
   )
 }
 

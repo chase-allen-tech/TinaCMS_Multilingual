@@ -13,6 +13,8 @@ import { toMarkdownString } from 'next-tinacms-markdown'
 import { useState } from 'react'
 import { Button } from '@tinacms/styles'
 
+import { useTranslation } from 'react-i18next';
+
 const Home = ({ markdownFile }) => {
 
   const ENGLISH = "English";
@@ -22,6 +24,7 @@ const Home = ({ markdownFile }) => {
 
   const [btn_lang, setBtnLang] = useState("English");
   const [btn_mode, setBtnMode] = useState("Edit Mode");
+  const { t, i18n } = useTranslation('common');
 
   const cms = useCMS()
   const [editableData, form] = useForm({
@@ -67,12 +70,11 @@ const Home = ({ markdownFile }) => {
         <title>Temp</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
+      {t('title')}
+
       <Button onClick={onClickLangBtn}>{btn_lang}</Button>
       <Button onClick={onClickModeBtn}>{btn_mode}</Button>
-      {/* {btn_mode == VIEWMODE ? (<h1>
-        <InlineText name="frontmatter.title" className="editfield mt-5" focusRing={false} />
-      </h1>) : (<h1>{editableData.frontmatter.title}</h1>)}
-       */}
       <InlineField name="title">
         {({ input }) => {
           if (cms.enabled) {
@@ -88,7 +90,6 @@ const Home = ({ markdownFile }) => {
           }
         }}
       </InlineField>
-      {/* <input type="text" onChange={onChange()} /> */}
     </InlineForm>
   )
 }
